@@ -1,7 +1,10 @@
 import express from 'express';
 import BlogController from './blog.controller.js';
-import validateBody from '../../shared/middlwear/validateBody.js';
+import {validateBody,validateParam} from '../../shared/middlwear/validateBody.js';
 import { createBlogSchema } from './schema/create-blog.validator.js';
+import { updateBlogSchema } from './schema/update-blog.validator.js';
+import { ObjectId } from './schema/id-validator.js';
+
 
 const router = express.Router();
 
@@ -12,12 +15,12 @@ router.post('/', validateBody(createBlogSchema), BlogController.createBlog);
 router.get('/', BlogController.getAllBlogs);
 
 // Get a single blog by ID
-router.get('/:id', BlogController.getBlogById);
+router.get('/:id',validateParam(ObjectId), BlogController.getBlogById);
 
 // Update a blog by ID
-router.put('/:id', BlogController.updateBlog);
+router.put('/:id',validateParam(ObjectId),validateBody(updateBlogSchema), BlogController.updateBlog);
 
 // Delete a blog by ID
-router.delete('/:id', BlogController.deleteBlog);
+router.delete('/:id',validateParam(ObjectId), BlogController.deleteBlog);
 
 export default router;

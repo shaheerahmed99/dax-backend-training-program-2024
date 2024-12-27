@@ -1,20 +1,20 @@
-import Blog from './Blog.model';
+import Blog from './Blog.model.js';
 
 class BlogRepository {
-  async create(data) {
+  static async create(data) {
     const blog = new Blog(data);
     return await blog.save();
   }
 
-  async findAll() {
+  static async findAll() {
     return await Blog.find();
   }
 
-  async findById(id) {
+  static async findById(id) {
     return await Blog.findById(id);
   }
 
-  async updateById(id, data) {
+  static async updateById(id, data) {
     return await Blog.findByIdAndUpdate(
       id,
       { ...data, updatedAt: Date.now() },
@@ -22,9 +22,9 @@ class BlogRepository {
     );
   }
 
-  async deleteById(id) {
+  static async deleteById(id) {
     return await Blog.findByIdAndDelete(id);
   }
 }
 
-export default new BlogRepository();
+export default BlogRepository;

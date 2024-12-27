@@ -4,6 +4,7 @@ class BlogController {
     static async createBlog(req, res) {
         try {
             const blog = await BlogService.createBlog(req.body);
+            console.log(req.body);
             res.status(201).json(blog);
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -11,9 +12,7 @@ class BlogController {
     }
 
     static async getAllBlogs(req, res) {
-        console.log('====================================');
-        console.log(process.env.MONGODB_URI);
-        console.log('====================================');
+
         try {
             const blogs = await BlogService.getAllBlogs();
             res.status(200).json(blogs);

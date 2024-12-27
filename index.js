@@ -10,8 +10,8 @@ const app = express()
 config();
 
 const env_validator_schema = z.object({
-    MONGODB_URI: z.string().min(1, "Title is required"),
-    APP_PORT: z.string().min(1, "Content is required"),
+    MONGODB_URI: z.string().min(1, "DB URL required"),
+    APP_PORT: z.string().min(1, "Port is required"),
 });
 
 
